@@ -1,0 +1,38 @@
+***************************************************************************
+burger builder - practice app notes (section 8)
+**************************************************************************
+
+- Planning a React App - Core Steps:
+
+	- Component Tree/Structure
+	
+	- Application State (Data)
+	
+	- Components vs. Containers
+	
+IMPORTANT!!!
+
+	- CONTAINERS are STATEFUL (they DO manage state)
+		- Typically are a CLASS
+	
+	- COMPONENTS are STATELESS (they DO NOT manage state)
+		- Typically are a FUNCTION
+		
+		- Usually will have a structure like this:
+			
+			import React from 'react';
+
+			const componentName = (props) => {
+				return (
+					<div></div>  
+				);
+			};
+
+			export default componentName;
+			
+- KEEP IN MIND... REGARDING COMPONENTS:
+
+	- very important to be mindful about creating components. keep in mind the purpose of the component and whether they will be
+	a wrapper for something else
+	
+- When defining handlers... use an arrow function!!!

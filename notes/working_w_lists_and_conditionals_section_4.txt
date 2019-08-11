@@ -1,0 +1,60 @@
+**********************************************************
+lists and conditionals
+***************************************************************
+
+Can use the ternary operator to toggle the displaying of a component:
+
+	- example
+		- define a true/false state (our example in this would be showPerson)
+		
+		- in the render/return, use the ternary operator, state.showPerson ? BLOCK_OF_CODE : null
+			- if show person is true, display the block of code... if false, display null
+	
+Can also use a simple if statement to check true/false and display the component:
+
+	-example
+		-same true/false state
+		
+		-define a variable to hold the components that you'd like to display/hide
+		
+		-create if conditional: if state is true -> the variable should have the value of the components you'd like to display
+		
+		-simply pass the variable into what is being rendered
+		
+TO TOGGLE THE TRUE/FALSE STATE
+
+	- create a toggle handler function
+	
+	- on a click, the state state should be modified and set to the opposite of whatever it was (true should go to false vice versa)
+	
+		- THE TOGGLE HANDLER PLUS EITHER OF THE ABOVE WILL ALLOW YOU TO HIDE/DISPLAY YOUR COMPONENTS
+		
+WHEN OUTPUTTING LISTS... JUST USE JAVASCRIPT!
+
+	- example: we have an array array = [ {1}, {2}, {3}, ...]
+	
+		-instead of having to create a component for each element, you can simply use a map array function:
+		
+			- (inside of a div) array.map(element => {
+				return <Component_Name element1={element.1} ... />
+			})
+				-This will go ahead and dynamically fill and return the entire array as React components rather than hardcoding
+				however many array elements there are
+				
+SPREAD OPERATOR:
+
+	- USE THIS WHEN ASSIGNING AN ARRAY VALUE TO A SEPARATE VARIABLE IN A HANDLER FUNCTION (can also be used for individual objects)
+	
+	-LIKELY THE WAY I SEE IT IS, WHEN CREATING A HANDLER FUNCTION -> USE A SPREAD OPERATOR IF ASSIGNING AN OBJECT TO A VARIABLE
+	
+	DONT DO THIS:
+	
+		const persons = personsState.persons;
+		
+	DO THIS:
+	
+		const persons = [...personsState.persons];
+		
+		-WHY??? 
+			- the array will be directly passed to the variable in the first solution, this can cause unwanted results when modifying it later in the handler.
+			With the second solution, the properties of the array will be spread out to a NEW array which will be stored in the variable

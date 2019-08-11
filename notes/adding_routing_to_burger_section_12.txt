@@ -1,0 +1,42 @@
+*************************************************************************
+adding routing to burger app (section 12)
+***********************************************************
+
+
+- PUSHING PARAMETERS TO THE URL TO BE USED ON A LATER PAGE
+
+	- this code will take the ingredients off of the state, package them to be added to the URL,
+	then add them to the URL to be used on the "/checkout" page
+
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+
+        const queryString = queryParams.join('&');
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
+		
+	- this code will then extract the data that was passed and save it to the state object
+	
+		const query = new URLSearchParams(this.props.location.search);
+        let ingredients = {};
+        for (let param of query.entries()) {
+            //ADDING THE + CONVERTS PARAM[1] INTO A NUMBER
+            ingredients[param[0]] = +param[1];
+        }
+        this.setState({
+            ingredients
+        });
+		
+- REMINDER WHEN UPDATING STATE OBJECT!!!
+
+	- ALWAYS MAKE COPIES WHEN MODIFYING THE CURRENT STATE OBJECT!!!
+	
+		- can be done using the spread operator
+		- rather than directly setting state on the state object itself... copy the values you want to update using the spread operator.
+		The spread operator will copy the values from the state object itself into a separate variable. Then do your modifications
+		and save your changes from the separate variable to the state.

@@ -1,0 +1,12 @@
+**********************************************************************
+form validation section 13
+*********************************************************************************
+
+-Keep in mind whenever updating the state
+	- DO NOT directly modify the state when you are updating it
+		
+		- using the spread operator... make a copy and store it in a separate variable.
+		
+			- make the update on the new copy
+			
+				- use setState to set the value of the state equal to the updated value in the copy variable

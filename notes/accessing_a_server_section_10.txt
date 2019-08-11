@@ -1,0 +1,15 @@
+**************************************************************************
+accessing a server 
+****************************************************************************
+
+- created the firebase instance. can make calls to that with axios to post JSON data
+
+- Higher Order Components:
+
+	- can be very useful when error handling.
+		- can create an error handling component that will only show up when there is an error
+			- just wrap all of the content that you'd like to block with the error handler and have the error handler display whatever the error is to the user
+			
+- COMPONENTDIDMOUNT
+
+	- good hook to fetch data dynamically in!!! make http calls here to pull initial data!!!

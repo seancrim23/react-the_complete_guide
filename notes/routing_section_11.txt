@@ -1,0 +1,77 @@
+*******************************************************************************
+multi-page feeling in a single page app - routing (section 11)
+*****************************************************************************
+
+USING REACT-ROUTER AND REACT-ROUTER-DOM (only DOM is required)
+
+- routing - showing different pages to the user
+
+- single page app - renders dynamic content in one HTML page based on the routing
+
+very simple!
+
+	- import Route library from react-router-dom
+	- add a Route element!
+	
+		- <Route path="/" exact render={() => <h1>Home</h1>} />
+		
+			- this will render the "Home" header when you navigate to the YOUR_URL/ page! "exact" means that this will ONLY render to the YOUR_URL/ page!
+			- you can also pass an element of a component type that you've created!
+			
+	- You can also render components directly!
+	
+		- <Route path="/" exact component={YOUR_COMPONENT_NAME} />
+
+- Using LINK rather than HTML A Link element
+	
+	- when using the provided HTML "A" link element, the entire page will be reloaded each time (we just want the routed content to load)
+	
+	- use <Link to="">random text</Link> rather than <a href="">random text</a>
+		- This built in react library will make sure ONLY the routed content is loaded rather than the entire page reloading
+
+Absolute Path - the path that you pass into your link will always be appended to the end of your root link 
+
+			- path="/new-post" will always append to your_link.com/new-post
+			
+VS
+
+Relative Path - the path that you pass in will get appended to the end of the current link
+
+			- if your link is your_link.com/example and you click to route to /new-post you will navigate to your_link.com/example/new-post
+			
+				- you can achieve this by dynamically building the link to=this.props.match.url + '/new-post'
+				
+-Accessing params on the props object
+
+	- when you add a route that passes a value like <Route path="/:id" exact component={Some_Component}>
+	- you can access an object that will be added to the props called "match"
+		- "match" will contain a "params" object where you can directly access the value that you passed on the URL
+		
+- TYPICAL FORM FOR CONDITIONAL COMPONENT RENDERING:
+
+	- add some sort of boolean to the state that will be the determiner of the component getting shown (showComponent: false)
+	
+		- have some sort of action happen that will trigger the boolean to become true (when -> this.setState({showComponent: true}))
+		
+			- in the render function, add a variable to be null
+			
+				- if the showComponent trigger is true, then return the JSX that you want to render in the variable
+				
+					- dynamically add the variable to your page {your_variable_with_comp_code}
+					
+- DEFAULT ROUTE FOR RENDERING 404 (and other errors):
+
+	- simply define a route without a path
+	
+		- <Route render={() => <h1>Not Found!</h1>} />
+		
+- LAZY LOADING COMPONENTS:
+
+	- lazy loading: only loading the component when it is needed
+	
+	- possible to create a higher order component that can wrap a component  that youd like to lazy load
+	
+	- ALSO can use a library called React.lazy()!!!!
+	
+		- The component that you define with the React.lazy() function will have to be surrounded by a "Suspense" library object
+			- <Suspense><Lazy_Component /></Suspense>

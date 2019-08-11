@@ -1,0 +1,25 @@
+*********************************************************************************
+react styling elements and components
+*********************************************************************************
+
+Very easy to dynamically style components:
+	
+	- set up conditionals (if this, then style it this way)
+		
+		- set up a variable (array, etc) to store class names that will correspond to css classnames
+		
+			-on a specific condition, add the class name to the variable
+			
+				- inject the variable into the style of the element that you want to style
+				
+CSS MODULES:
+
+	- similar to normal javascript modules
+	
+		- define a bunch of styling in a css file, import it like a normal javascript module
+		
+			- import Whatever_you_want_to_name_the_object from './your/css/file.css';
+			
+				- now you can pass in the styling like a JS module -> style="Whatever_you_want_to_name_the_object.Style1"
+				
+~ ~ ~ DO SOME WORK WITH PSEUDO SELECTORS WITH MODULES ~ ~ ~

@@ -1,0 +1,21 @@
+********************************
+React - getting start section 1
+********************************
+
+What is react?
+	- react is a javascript library for building UIs
+	- ALL ABOUT COMPONENTS!
+	
+Why react?
+
+	- UI state becomes difficult to manage with vanilla JS
+	- focus on business logic rather than having to focus on app exploding (fast and efficient)
+	- huge ecosystem, active community, high performance
+	
+How to get most out of the course???
+
+	- code along ! duh
+	- check source code
+	- ask in QA, answer questions
+
+OFFICIAL REACT DOCS: https://reactjs.org/

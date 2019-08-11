@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.App button{
+  background-color: 'green';
+}

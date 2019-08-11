@@ -1,0 +1,9 @@
+***********************************************
+debugging react apps/error handling etc
+***********************************************
+
+- Chrome debugging tools + sourcemaps provide a powerful method to debug with
+
+-Error Boundaries:
+	
+	- very useful tools to wrap normal components with. if the components fail, the error boundary can fail out the component rather than having the entire application fail out

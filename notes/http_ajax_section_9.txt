@@ -1,0 +1,15 @@
+**************************************************************
+reaching out to the web with http/ajax
+****************************************************************
+
+using the axios library:
+
+	- perform HTTP requests on endpoints
+		- use promises to return the data
+			- data will be in a JSON format so just inject it the way you would with static data
+			
+- setting a "base url" for axios..
+
+	- axios.defaults.baseUrl = "whatever url"
+	
+		- this will make it so that you only have to pass to axios calls whatever the end of the url is.

@@ -1,0 +1,60 @@
+**********************************************************************************
+redux section 14/ 15
+***************************************************************************
+
+-TO MAKE MANAGING APPLICATION STATE EASIER!!! :)))
+
+- ALWAYS MAKE SURE UPDATES ARE IMMUTABLE (DO NOT MAKE A CHANGE DIRECTLY TO THE STATE OBJECT!!!)
+
+	- DO NOT DO return state.counter++
+	
+	RATHER
+	
+	- return {
+		...state, (spread will apply all params)
+		counter: state.counter + 1
+	}
+	
+		- This is returning a new object that will be the new state value, NOT the original state object itself
+		
+- Store
+
+	- a Redux Store will be defined in the application
+	- THIS IS SEPARATE FROM REACT
+	
+- Reducer
+
+	- a Reducer must be defined and will hold all of the handling of the state and all of the conditionals that will cause the state to change
+	- the Reducer will be passed into the Store
+	
+- Dispatching actions
+
+	- Actions will be defined with a specific type
+		- the TYPE will determine what will happen to the state when the action is handled by the reducer
+		
+	- values can also be passed to actions to allow updates/modifications to the state depending on what action occurs
+	
+- SUBSCRIPTIONS
+
+	- takes away the need to manually getState, rather informs the user that you need to get a new STATE
+	- the subscribe function will run whenever an action fires
+	
+- HOW DO WE CONNECT REDUX TO REACT???
+	
+	- USING THE react-redux LIBRARY!!!
+	
+-NOTE WHEN DEFINING THE REDUCER
+
+	- ASSIGN THE INITIAL STATE AS THE DEFAULT VALUE FOR THE STATE OF THE REDUCER FUNCTION!!!
+	
+- WHEN UPDATING THE STATE OF AN ARRAY	
+
+	- DO NOT use state.your_array.push!!! That is going to be directly referencing the state!
+	
+	- DO use state.your_array.concat!!! That will be building a new array out of the state and whatever gets concatenated to the state!
+	
+	- GOOOOOOOOOD REFERENCE IN THE REACT DOCS: https://redux.js.org/recipes/structuring-reducers/immutable-update-patterns
+	
+LOTS OF REDUX DOCUMENTATION ON REDUX.JS.ORG!!!!
+
+REDUX MAKES STATE MANAGEMENT VERY EASY!!!!

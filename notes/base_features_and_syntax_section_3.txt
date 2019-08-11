@@ -1,0 +1,62 @@
+********************************************************
+base features and syntax - section 3
+********************************************************
+
+Rendering HTML code:
+
+	- can either return straight up JSX (it looks like HTML but it is JSX!!!) code with react:
+		
+		Component_name extends Component{
+			render(){
+				return (
+					<div className='App'>
+						<h1>hello react time</h1>
+					</div>
+				);
+			}
+		}
+		
+		- This component can now be injected into whereever we need it (select an element on the main page and tell react to inject "Component_name")
+		
+	OR
+	
+	- can define what to inject using the React library:
+	
+		define component in the same way...{
+			render(){
+				return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'This is an example of using the React library to inject!'));
+			}
+		}
+		
+		- This will now create a div element with className 'App' (you can add other properties to that if you want to add more styling, etc) and will fill the div with the h1 element that is defined above.
+		
+Creating Functional Components:
+
+	-store it in a folder. Name it the same way you would a class
+		- capitalize first letter, name it exactly what you want it to be
+		
+DIRECTLY FROM THE TUTORIAL:
+
+	When creating components, you have the choice between two different ways:
+
+		Functional components (also referred to as "presentational", "dumb" or "stateless" components - more about this later in the course)
+			=> const cmp = () => { return <div>some JSX</div> } (using ES6 arrow functions as shown here is recommended but optional)
+
+		class-based components (also referred to as "containers", "smart" or "stateful" components)
+			=> class Cmp extends Component { render () { return <div>some JSX</div> } } 
+			
+NESTING JAVASCRIPT CODE INTO JSX THAT IS RENDERED:
+
+	- simply wrap the javascript code that you want to run with curly braces {javascript_code_i_want_to_run}
+	
+Passing properties to JSX that will be rendered:
+
+	<Component_Name prop1="test" prop2="test".../>
+
+	- function based components: pass an object called "props" to the function, access each property like a normal object => props.prop1, props.prop2...
+	
+	- class based components: use this.props => this.props.prop1, this.props.prop2...
+	
+UNDERSTANDING AND USING STATE!!!:
+
+	

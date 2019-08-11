@@ -1,0 +1,32 @@
+********************************************************************
+testing section 20
+**********************************************************************
+
+TESTING TOOLS TO USE!!!
+
+	- test runner - Jest
+	- testing utilities - ("simulate" the React App (mounts components, allows us to dig into the DOM)) - Enzyme
+	
+What should we test?
+
+	- isolated units - test your reducer functions, etc
+	- conditional output - if something renders when a certain condition is met, test that!
+	
+What shouldnt we test?
+
+	- dont test the libraries themselves (dont test react, etc)
+	- dont test complex connections!!!
+	
+ENZYME "SHALLOW" METHOD:
+
+	- DOES A SHALLOW COPY OF A REACT COMPONENT
+	
+		- YOU CAN PASS PROPERTIES TO THE SHALLOWLY RENDERED COMPONENT AND, BASED ON THOSE, CAN "EXPECT" CERTAIN OUTPUT BASED ON WHAT IS PASSED IN
+		
+Setting up properties, components, etc. before a test:
+
+	- built in beforeEach function. runs before each test and can set up whatever needs to be set up to prevent code becoming redundant
+	- "after" also exists if you need to tear anything down when a test has completed
+	
+- lots of good docs online for JEST and ENZYME
+	 

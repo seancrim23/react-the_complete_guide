@@ -1,0 +1,73 @@
+****************************************************************
+react component deep dive and react internals
+***************************************************************
+
+- Able to define a component to handle the creation of a list of lower level components:
+
+	- for example, we COULD make a list of "Person" components in our container App file,
+	
+	ORRRRRR
+	
+	- we can make a component called "Persons (People?)" and define the list in that component.
+	
+		- then, all we need to do is import the Persons component and simply create an element of it in the container, passing any necessary arrays/handler functions directly to it.
+		
+- IMPORTANT - IF YOU HAVE A BUNCH OF STATIC JSX, JUST MAKE A COMPONENT TO HOLD IT ALL!!!
+
+- CLASS BASED V FUNCTIONAL COMPONENTS:
+
+	- USE CLASS BASED WHEN: 
+		- need to manage State
+		- need access to Lifecycle Hooks
+		- don't want to use React Hooks
+		
+	- USE FUNCTIONAL WHEN:
+		- all other cases
+		
+- Class based lifecycle:
+
+	- react runs these for us, can use for various reasons (pull data from web, perform a cleanup, etc)
+	- componentDidMount() - EXTREMELY IMPORTANT, will be using a lot
+	
+- Functional Components lifecycle hooks:
+
+		- using useEffect() rather than the other hooks that are used in the class based
+			- You can define useEffect to only fire when a change is made to a particular dependency. You would pass the dependencies in as an array:
+				- useEffect(() => {
+					//do something
+				}, ['dependencies', 'go', 'here']);
+		- you can use React.memo with these to take a snapshot of the properties of the component, if they changed, it will run the lifecycle hooks
+	
+- LIFESTYLE HOOKS:
+
+	- (this is my definition so if anyone ever reads it bear with me) These are essentially functions that are built into React to be used with Components.
+	They allow actions to be performed on MANY actions that will ever happen to the Component.
+		- they provide the ability to "when SOMETHING happens to the component, you can define SOMETHING to happen"
+		
+- rendering adjacent JSX elements:
+
+	- rather than wrapping JSX elements with a parent <div> element, you can simply wrap it in an array:
+	
+		- return [ <jsx1/>, <jsx2/>, <jsx3/> ];
+		
+- Setting the state correctly:
+
+	- Needs to be kept in mind when setting the state to something new that would depend on the old state
+		- example, setting a counter of changes made in the state
+		
+			- rather than setting the state by directly referencing the object:
+			
+				- this.setState({
+					persons,
+					changeCounter: this.state.changeCounter + 1
+				});
+				
+			DO IT LIKE THIS:
+			
+				- this.setState((prevState, props) => {
+					return {
+						persons,
+						changeCounter: prevState.changeCounter + 1
+					}
+				});
+				- rather than DIRECTLY referencing the state object, reference the PREVIOUS state object

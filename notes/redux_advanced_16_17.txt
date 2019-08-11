@@ -1,0 +1,123 @@
+*********************************************************************************
+redux advanced section 16
+****************************************************************************
+
+middleware:
+
+action -> middleware -> reducer
+
+- Can make use of ACTION CREATORS to execute asynchronous code!!!
+
+	- WHAT IS an ACTION CREATOR???
+		
+		- a FUNCTION that returns an ACTION!
+		
+		- in the dispatch function we usually will pass in a JS object...
+		
+			- ACTION CREATORS are functions that return those objects
+			
+				EX. export const storeResult = result => {
+						return {
+							type: STORE_RESULT,
+							result
+						};
+					};
+					
+- We can use REDUX-THUNK library to handle asynchronous code
+
+	- pass redux-thunk to our middleware
+	
+		- ex:
+		
+		const saveResult = result => {
+			return {
+				type: STORE_RESULT,
+				result
+			};
+		}
+
+		export const storeResult = result => {
+			return dispatch => {
+				setTimeout(() => {
+					dispatch(saveResult(result));
+				}, 2000);
+			}
+		};
+		
+		- thunk intercepts the dispatch and passes it in as a function.
+			- the asynchronous code (setTimeout in this example) is allowed to run and then, on success, we
+			can run the dispatch function and return that to the dispatch inside of the actual react page
+	
+- WHEN CREATING ACTIONS - ALWAYS SPLIT THEM UP!!!
+
+	- RATHER THAN HAVE ALL ACTIONS IN ONE HUGE FILE... SPLIT THEM UP BASED ON WHAT THEYRE INTERACTING WITH/WHAT THEY DO!!!
+	
+- WHERE TO PUT LOGIC??? ACTION CREATORS v REDUCERS
+
+	- ACTION CREATORS
+	
+		- can run async code!!!
+		- SHOULD NOT prepare the state update too much! 
+		- just pull data in these, no need to perform any business logic
+		
+	v.
+	
+	- REDUCER
+		
+		- pure, sync code only!!!
+		- business logic
+		- REDUCERS UPDATE THE STATE!!!
+		
+- Utility functions
+	- the same as normal utility functions. 
+		- rather than returning an object on multiple lines in the reducers... just define a utility function so you can return the updated object on one line
+		
+- When it comes to reducer switch statements... try to make sure that only one line of code is executed for every case
+
+	- AKA just write helper functions to perform the meat and potatoes actions
+	
+- Usual Logic when it comes to Action creators
+	
+	- Ones where async code is being run will usually have one "container" function with two helper functions - typically a positive and negative case
+		- positive and negative case because the async call will either pass or fail:
+		
+			export const containerActionCreatorExample = someParam(s) => {
+				return dispatch => {
+					some_sort_of_async_function()
+						.then(response => {
+							//THE POSITIVE CREATOR WILL DISPATCH HERE
+							dispatch(whatever_your_positive_case_function_is)
+						})
+						.catch(error => {
+							//THE NEGATIVE CREATOR WILL DISPATCH HERE
+							dispatch(whatever_your_negative_case_function_is)
+						});
+				};
+			};
+			
+			- The action creator functions will always return the TYPE of the action and also typically some sort of payload (data related to the action, usually real data
+			on a successful action or an error on an unsuccessful action).
+
+-EVERY TIME YOU USE REDUX IN A CONTAINER YOU WILL NEED A MAPSTATETOPROPS AND MAPDISPATCHTOPROPS FUNCTION!!!
+
+	- THESE WILL BE PASSED TO THE CONNECT FUNCTION THAT IS USED TO CONNECT TO REDUX!
+	
+		- dispatch is not necessarily required but if you are handling actions with redux you will need the dispatch function
+		
+-WHEN COMBINING REDUCERS:
+
+	- they will be combined like this:
+		const rootReducer = combineReducers({
+			burgerBuilder: burgerBuilderReducer,
+			order: orderReducer
+		});
+		
+		- rootReducer will get passed into createState
+		
+		HOWEVER KEEP IN MIND
+		
+			- when referencing the state object in your containers, make sure you specify which reducer you are
+			getting your state from!!!
+				
+				- since there are multiple reducers you cannot just do state.your_variable, it has to be state.reducer_name.your_variable
+					- in our case it would be either state.burgerBuilder.your_variable or state.order.your_variable

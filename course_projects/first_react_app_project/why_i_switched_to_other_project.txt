@@ -1,0 +1,1 @@
+I used defined react function components and because of that the application was continually running into problems. From here on I will be using class components.
