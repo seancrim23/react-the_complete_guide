@@ -1,0 +1,11 @@
+*************************************************************************************
+next js section 23
+****************************************************************************************
+
+-next allows us to serve our urls exactly how our files are set up in the file structure
+
+	- example: pages--
+					auth--
+						user.js
+						
+					- would be accessible at base_url/pages/auth/user

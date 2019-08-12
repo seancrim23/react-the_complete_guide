@@ -1,0 +1,1 @@
+{"name":"next_js_bonus_lesson_section_23","version":"1.0.0","description":"","main":"index.js","scripts":{"dev":"next","build":"next build","start":"next start"},"author":{"name":"Sean Crim"},"license":"ISC","dependencies":{"next":"^9.0.3","react":"^16.9.0","react-dom":"^16.9.0"},"readme":"ERROR: No README data found!","_id":"next_js_bonus_lesson_section_23@1.0.0"}
