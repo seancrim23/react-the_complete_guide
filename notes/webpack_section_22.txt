@@ -1,0 +1,9 @@
+******************************************************************************************************************
+webpack section 22
+******************************************************************************************************
+
+- de facto standard for setting up projects nowadays
+
+- essentially bundles all files together to make the entire project optimized. (all js bundles to one js, all css to one css, etc)
+
+NOTE: WHAT IS BABEL??? - turns modern js to older js (essentially that you can write modern JS to be used on any machine because babel will modify it to be understood by any machine)

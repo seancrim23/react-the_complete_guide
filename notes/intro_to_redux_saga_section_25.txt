@@ -1,0 +1,31 @@
+******************************************************************************
+intro to redux saga section 25
+*****************************************************************************
+
+what is it?
+
+what is it used for?
+
+- adding a * to function creates a "generator"
+
+	- function* function_name() {};
+	- allows the function to be called incrementally
+	
+- When should we create a saga? 
+
+	- when an action creator is doing more than just returning an action
+	- seems as though any other logic that happens besides returning an action can be outsourced to a saga
+		- anything not considered an action is considered a "side-effect" 
+			- side-effects are what we will be planning on storing in these sagas
+
+- using yield:
+	- works in a bit of a similar way as "await"
+		- can be wrapped in a try catch block to handle failure if the line that we are yielding throws an error for whatever reason
+	- essentially stops the program for a moment to wait for the response of whatever we are calling it in front of.
+	
+ADVANTAGES!!!
+
+	- creates LEAN action creators!!!
+		- action creators are ONLY returning actions!!!
+			- everything else gets handled by the sagas!
+	

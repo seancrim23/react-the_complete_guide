@@ -1,0 +1,10 @@
+****************************************************************************************
+animation in react apps section 24
+****************************************************************************************
+
+- able to incorporate the "transition" and "transform" properties in your CSS files for transitions
+
+- Making use of the "react-transition-group" "Transition" library.
+
+	- can wrap components with the Transition element and define properties on it to determine what kind of transition will be applied
+		- it essentially works hand in hand with CSS and will control what CSS animations are applied for the kind of action
