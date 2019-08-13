@@ -1,0 +1,169 @@
+**********************************************************************************
+react hooks section 26
+*******************************************************************************
+
+what are "react hooks" ??? (introduced React 16.8)
+
+	- allow us to work with functional components ONLY
+	- Javascript Functions which can only be used inside Functional Components or other Hooks
+	- allow you to add state to functional components and share logic across components
+	
+	- Named useXYZ()
+	
+THE CORE REACT HOOK!!! 
+
+	>>>>>>>>>> useState <<<<<<<<<<<
+	
+		- this is what allows us to manage state in functional components!!!
+		
+		- react knows that, when useState is called, it manages it separately
+			- this means that on a re-render, useState will not be initialized to what was passed in originally, but 
+			will rather persist whatever current values exist in the state
+
+- When updating the state using useState : 
+
+	- handled like an array:
+		- inputState[0] refers to the current values of the state
+		- inputState[1] refers to the new values of the state
+		
+			- USE ARRAY DESTRUCTURING FOR THIS !!!
+				- const [ whateverState, setWhateverState ] = useState({variables: '', for: '', your: '', state: ''});
+				
+			- CAN ALSO SET THESE INDIVIDUALLY!!!
+				- ex if we have a state variable called title and one called amount:
+				
+					-   const [enteredTitle, setEnteredTitle] = useState('');
+						const [enteredAmount, setEnteredAmount] = useState('');
+						
+							- now the value for each will be handled in the "entered..." variable and if we want to make an update we simply just pass the
+							value we want to update the state with to the "setEntered..." function! very simple
+		
+	- must always pass in all of the state values when updating, otherwise values will be overwritten
+		- if we do inputState[1]({title: event.target.value}) -> every other value in the state will be removed if we initialized our state with any other member values
+		- must do inputState[1]({title: event.target.value, (all_other_state_variables: inputState[0].all_other_state_variables)})
+			- must set all other state values to whatever their current value is in the state, otherwise they will be lost
+			
+		- more secure of a way to pass the update like a function:
+			- onChange={event => inputState[1](prevInputState => ({
+				title: event.target.value, 
+				amount: prevInputState.amount}))}/>
+				
+				- passing "prevInputState" rather than inputState[0] is more secure
+				
+- 2 IMPORTANT RULES WHEN WORKING WITH ANY HOOKS!!!
+
+	- must only use the hooks in functional components or inside of custom hooks!!!
+	- always have to use the hooks in the ROOT level of your component!!!
+		- basically put them at the global scope of the functional component, don't do a useState inside a function
+		that is defined inside of your functional component
+		
+- the USEEFFECT hook!!!!!
+
+	- used to manage side effects! (some logic that runs that effects the application but DOES NOT get finished in this render cycle)
+	- gets executed right AFTER every component render cycle
+	
+- useReducer hook:
+
+	- HAS NO CONNECTION TO THE REDUX LIBRARY!!!
+	
+	- very similar to what we did with the Redux library (but remember note #1)
+		- example reducer structure:
+			- (gets defined before the component)
+			const ingredientReducer = (currentIngredients, action) => {
+				switch(action.type){
+					case 'SET':
+						return action.ingredients;
+					case 'ADD':
+						return [...currentIngredients, action.ingredient];
+					case 'DELETE':
+						return currentIngredients.filter(ingredient => ingredient.id !== action.id);
+					default:
+						throw new Error('Will never reach the default!');
+				}
+			}
+			
+			- Then we incorporate the reducer inside the component like so:
+				  const [ userIngredients, dispatch ] = useReducer(ingredientReducer, []);
+					-"userIngredients" will be the state that we are going to be interacting with, initialized as an empty array in the second argument to the "useReducer" function.
+					
+- working with useContext() with functional components
+
+	- very similar to creating a component, makes it so that we do not have to define a component as a class component to add some state variables
+	
+		- we define our context (auth in this case):
+			export const AuthContext = React.createContext({
+				isAuth: false,
+				login: () => {}
+			});
+			- this is the context that we would like to be able to provide where necessary
+				- key word here is provide... we need to define a function that will do just that, provide the context wherever it needs to go:
+					const AuthContextProvider = props => {
+						const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+
+						const loginHandler = () => {
+							setIsAuthenticated(true);
+						};
+
+						return (
+							<AuthContext.Provider 
+							value={{ login: loginHandler, isAuth: isAuthenticated }}>
+								{props.children}
+							</AuthContext.Provider>
+						);
+					};
+					- (this will be exported), then we can wrap our App component in the index with the provider. notice how we pass the context values on the AuthContext.Provider element
+					
+					- now we wrap our App component in the index to provide our desired context:
+						ReactDOM.render(
+							<AuthContextProvider>
+								<App />
+							</AuthContextProvider>, 
+							document.getElementById('root')
+						);
+						
+						- now we can make use of "useContext" in the components we need them in:
+						
+							const Auth = props => {
+								const authContext = useContext(AuthContext);
+
+								const loginHandler = () => {
+									authContext.login();
+								};
+
+								return (
+									<div className="auth">
+										<Card>
+											<h2>You are not authenticated!</h2>
+											<p>Please log in to continue.</p>
+											<button onClick={loginHandler}>Log In</button>
+										</Card>
+									</div>
+								);
+							};
+							- because we provided context, we can access the "login" function, which will then change the "isAuthenticated" value which
+							we will use in the following component:
+								const App = props => {
+									const authContext = useContext(AuthContext);
+
+									let content = <Auth />;
+									if(authContext.isAuth){
+										content = <Ingredients />;
+									}
+
+									return content;
+								};
+							- finally, we can grab the 'isAuth' property (that was modified by the login function from the previous component) and use that
+							to determine what want to render to the screen
+							
+- make use of the useCallback function on functions, useMemo on certain values
+	- useMemo is an alternative to React.memo()
+	-example: 
+		  const ingredientList = useMemo(() => {
+				return (
+					<IngredientList 
+					ingredients={userIngredients} 
+					onRemoveItem={(id) => removeIngredientHandler(id)}
+					/>
+				);
+		}, [userIngredients, removeIngredientHandler]);
+		- makes sure that this only renders when the userIngredients or removeIngredientHandler dependencies change
