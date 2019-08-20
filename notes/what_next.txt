@@ -1,0 +1,24 @@
+*********************************************************************************
+what to do next???!?!?!?!?
+*********************************************************************************
+
+- https://react.rocks
+
+- sites using react wiki (google built with react)
+
+- gatsby.js website
+	- creates static sites with react
+	
+- react native
+
+	- react but for mobile apps!!!!!!
+	
+-material UI
+	- component library
+		- basically a bunch of templates to add components rather than create your own
+		
+	- can also use Bootstrap React!
+	
+-Preact (smaller apps)
+	- lightweight alternative to React
+	- look through "differences to React" tab

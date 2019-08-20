@@ -1,0 +1,17 @@
+********************************************************************************
+replacing redux w react hooks section 28
+*********************************************************************************
+
+why?
+
+	- maybe just want to handle all of your application - no redux involved
+	
+- can make use of "Context" to replace redux.
+	- give your application some initial context and then have that be what manages the state of the application
+	
+	- dont make use of context to manage components that are constantly rerendering!!!
+		- better off to use for more static components that may only be updating every once in a while
+		
+- using a custom hook as a store (rather than using redux):
+
+	- 
